@@ -23,6 +23,7 @@ class AreaController extends Controller
         // Validate
         $this->validate($request, [
           'nombre' => 'required',
+          'encargado' => 'required',
           'descripcion' => 'required'
         ]);
 
@@ -53,8 +54,9 @@ class AreaController extends Controller
     {
         // Validate
         $this->validate($request, [
-          'nombre' => 'required',
-          'descripcion' => 'required'
+            'nombre' => 'required',
+            'encargado' => 'required',
+            'descripcion' => 'required'
         ]);
 
         // Update

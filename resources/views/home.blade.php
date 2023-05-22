@@ -5,11 +5,24 @@
                 <div class="card-header" style="text-align: center; color:black; font-weight: 700; 
                 text-decoration: underline;">AREA</div>
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                  @if($errors->any())
+                    <div class="mt-3  alert alert-primary alert-dismissible fade show" role="alert">
+                        <span class="alert-text text-white">
+                        {{$errors->first()}}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            <i class="fa fa-close" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                  @endif
+                  @if(session('success'))
+                      <div class="m-3  alert alert-success alert-dismissible fade show" id="alert-success" role="alert">
+                          <span class="alert-text text-white">
+                          {{ session('success') }}</span>
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                              <i class="fa fa-close" aria-hidden="true"></i>
+                          </button>
+                      </div>
+                  @endif
                     @if( count($areas) > 0 )
                     <div class="row">
                       <section class="section dashboard">
@@ -23,9 +36,9 @@
                                   <div class="filter">
                                     <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                      <li><a class="dropdown-item" href="{{ url('area/'.$collection->id.'/edit')}}">Editar</a></li>
+                                      <li><a class="dropdown-item" href="{{ url('admin/area/'.$collection->id.'/edit')}}">Editar</a></li>
                                       <li>
-                                        <form action="{{ url('area/'.$collection->id)}}" method="post">
+                                        <form action="{{ url('admin/area/'.$collection->id)}}" method="post">
                                           <input name="_method" type="hidden" value="delete">
                                           <input class="dropdown-item" type="submit" value="Borrar" id="btnDelete">
                                           {{ csrf_field() }}
@@ -33,7 +46,7 @@
                                       </li>
                                     </ul>
                                   </div>
-                                  <a href="{{ url ('area/'.$collection->id.'/show')}}">
+                                  <a href="{{ url ('admin/area/'.$collection->id.'/show')}}">
                                   <div class="card-body">
                                     <h5 class="card-title"> {{$collection->nombre}} <span>| {{$collection->encargado}}</span></h5>
                                     <div class="d-flex align-items-center">
@@ -63,10 +76,10 @@
                   @else
                     <p class="flow-text">Actualmente no tienes ninguna Area registrado. ¡Haga clic en el botón para agregar algunos!</p>
                   @endif
-                  <a class="btn btn-outline-primary" href="{{ url('/area/create')}}">
+                  <a class="btn btn-outline-primary" href="{{ url('admin/area/create')}}">
                     <i class="bi bi-collection"> Nueva Area</i>
                   </a>
-                  <a class="btn btn-outline-dark" href="{{ isset($area->id) ? url('/item/create/'.$area->id) : url('/item/create/0') }}">
+                  <a class="btn btn-outline-dark" href="{{ isset($area->id) ? url('admin/item/create/'.$area->id) : url('admin/item/create/0') }}">
                     <i class="bi bi-collection"> Mueble</i>
                   </a>
                 </div>

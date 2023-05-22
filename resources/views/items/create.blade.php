@@ -8,7 +8,7 @@
             <div class="card-body">
                 <h5 class="card-title"> Registrar nuevo mueble</h5>
                 <!-- Advanced Form Elements -->
-                <form id="image-form" method="post" action="{{ url('item/') }}" enctype="multipart/form-data">
+                <form id="image-form" method="post" action="{{ url('admin/item/') }}" enctype="multipart/form-data">
                     @csrf
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Detalles objeto</label>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                     <a href="{{ URL::previous() }}" type="reset" class="btn btn-secondary">Cancelar</a>
                 </div>
                 </form><!-- End General Form Elements -->
@@ -95,7 +95,6 @@
             if (switchInput.checked) {
                 uploadContainer.style.display = 'none';
                 cameraContainer.style.display = 'block';
-
                 // Activar la cámara
                 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     navigator.mediaDevices.getUserMedia({ video: true })

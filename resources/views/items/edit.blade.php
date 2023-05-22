@@ -8,7 +8,7 @@
             <div class="card-body">
                 <h5 class="card-title"> Modificar {{$item->nombre}}</h5>
                 <!-- Advanced Form Elements -->
-                <form method="post" action="{{ url('item/'.$item->id.'/edit') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ url('admin/item/'.$item->id.'/edit') }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Detalles objeto</label>
@@ -53,7 +53,11 @@
             </div>
         </div>
         <div class="col-lg-4">
-            <div id="imageContainer"></div>
+            <div id="imageContainer">
+            </div>
+            <br>
+            <h4>Imagen Anterior</h4>
+            <img src="{{ asset('img/fotos/'.$item->image)}}" alt="Imagen Anterior">
         </div>
     </div>
 </section>

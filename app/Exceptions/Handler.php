@@ -31,9 +31,9 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
-        if ($exception instanceof NotFoundHttpException) {
+        /*if ($exception instanceof NotFoundHttpException) {
             return redirect('/');
-        }
+        }*/
 
         return parent::render($request, $exception);
     }
