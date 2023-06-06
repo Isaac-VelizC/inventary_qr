@@ -7,11 +7,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Upds</title>
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{ asset('img/logo.png')}}" rel="icon">
+    <link href="{{ asset('img/logo.png')}}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -55,13 +55,13 @@
                 @else
                     <li class="nav-item dropdown pe-3">
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                            <img src="{{ asset('assets/img/profile-img.jpg')}}" alt="Profile" class="rounded-circle">
+                            <img src="{{ asset('img/logo_color.png')}}" alt="Profile" class="rounded-circle">
                             <span class="d-none d-md-block dropdown-toggle ps-2" style="color:white">{{ Auth::user()->name }}</span>
                         </a><!-- End Profile Iamge Icon -->
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                             <li class="dropdown-header">
+                            <img src="{{ asset('img/logo_color.png')}}" height="30" width="30" alt="Profile" class="rounded-circle">
                             <h6>{{ Auth::user()->name }}</h6>
-                            <span>UPDS</span>
                             </li>
                             <li>
                             <hr class="dropdown-divider">
@@ -71,7 +71,7 @@
                                 onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">                                                     
                                 <i class="bi bi-box-arrow-right"></i>
-                                <span>{{ __('Sign Out') }}</span>
+                                <span>{{ __('Salir') }}</span>
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf

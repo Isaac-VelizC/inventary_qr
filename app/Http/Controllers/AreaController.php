@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller

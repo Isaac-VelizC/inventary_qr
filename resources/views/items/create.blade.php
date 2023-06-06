@@ -1,6 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+    .img{
+  margin:10px auto;
+  border-radius:5px;
+  border: 1px solid #999;
+  padding:13px;
+  width:220px;
+  height:220px;
+  background-size: 100% 100%;
+  background-repeat:no-repeat;
+  background:url(../img/imagen.jpg);
+  background-size: cover;
+  }
+.img img{
+  width: 100%;
+}
+@media all and (min-width: 500px) and (max-width: 1000px)
+{  
+.img{
+  margin:20px auto;
+  border-radius:5px;
+  border: 1px solid #999;
+  padding:13px;
+  width:300px;
+  height:300px;
+  background-size: 100% 100%;
+  background-repeat:no-repeat;
+  background:url(../img/imagen.jpg);
+  background-size: cover;
+  
+  }
+}
+.img img{
+   width:100%;
+}
+</style>
+
 <section class="section">
     <div class="row">
         <div class="col-lg-6">
@@ -64,19 +102,46 @@
             </div>
         </div>
         <div class="col-lg-4">
-            <div id="imageContainer"></div>
-            <div id="camera-container">
+            <div id="imageContainer" class="img"></div>
+            <!--div id="camera-container">
                 <video id="video-preview" autoplay></video>
                 <button id="capture-btn">Capturar imagen</button>
             </div>
-            
             <div id="image-preview-container">
                 <img id="image-preview" src="" alt="Vista previa de la imagen">
-            </div>
-
+            </div-->
         </div>
     </div>
 </section>
+
+    <script>
+        // Obtener referencia al elemento de entrada de archivo
+        var uploadInput = document.getElementById('uploadInput');
+        // Obtener referencia al contenedor de la imagen
+        var imageContainer = document.getElementById('imageContainer');
+        // Agregar un evento change al elemento de entrada de archivo
+        uploadInput.addEventListener('change', function(event) {
+            // Obtener el archivo seleccionado
+            var file = event.target.files[0];
+            // Crear una instancia de FileReader
+            var reader = new FileReader();
+            // Definir la función de carga completada
+            reader.onload = function(e) {
+                // Crear un elemento de imagen
+                var image = document.createElement('img');
+                // Establecer la ruta de la imagen como el resultado de la carga
+                image.src = e.target.result;
+                // Agregar la imagen al contenedor de la imagen
+                image.input.addEventListener("change", () => {
+                    image.src = URL.createObjectURL(image.input.files[0]);
+                });
+                // Agregar la imagen al contenedor
+                imageContainer.appendChild(image);
+            }
+            // Leer el archivo como una URL de datos
+            reader.readAsDataURL(file);
+        });
+    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
