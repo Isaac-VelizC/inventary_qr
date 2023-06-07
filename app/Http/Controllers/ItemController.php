@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Area;
 use App\Models\Item;
+use App\Models\Tipo;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Carbon\Carbon;
@@ -22,12 +23,13 @@ class ItemController extends Controller
 
     public function create($id)
     {
+        $tipoActivo = Tipo::all();
         $areas = Area::all();
         if ($id === '0') {
-            return view('items.create')->with('areas', $areas);
+            return view('items.create')->with('areas', $areas)->with('tipoActivo', $tipoActivo);;
         } else {
             $idarea = Area::find($id);
-            return view('items.create')->with('areas', $areas)->with('idarea', $idarea);
+            return view('items.create')->with('areas', $areas)->with('tipoActivo', $tipoActivo);
         }
     }
 
@@ -41,6 +43,8 @@ class ItemController extends Controller
         $coll->nombre = $request->nombre;
         $coll->descripcion = $request->descripcion;
         $coll->area_id = $request->id_area;
+        $coll->tipo_id = $request->id_tipo;
+        $coll->fecha_compra = $request->fecha;
         //Codigo
         $idArea = Item::max('id');
         if ($idArea === null) {

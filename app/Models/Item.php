@@ -10,7 +10,7 @@ class Item extends Model
     use HasFactory;
     protected $table = "items";
     protected $primaryKey = "id";
-    protected $fillable = ['image', 'nombre', 'area_id', 'estado', 'qr_code', 'descripcion', 'codigo'];
+    protected $fillable = ['tipo_id', 'image', 'nombre', 'area_id', 'estado', 'qr_code', 'descripcion', 'codigo', 'fecha_compra', 'fecha_baja', 'user_baja'];
 
     public function area()
     {

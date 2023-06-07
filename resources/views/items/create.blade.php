@@ -51,46 +51,63 @@
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Detalles objeto</label>
                     <div class="col-sm-10">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" id="nombre">
-                        <label for="nombre">Nombre</label>
-                    </div>
-                    
-                    <div id="switch-container">
-                        <input type="checkbox" id="switch-input">
-                        <label for="switch-input">Cámara</label>
-                    </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="id_tipo" name="id_tipo" aria-label="Tipo de activo">
+                            <option value="" selected disabled>Selecciona el Tipo</option>
+                                @if( count($tipoActivo) > 0 )
+                                    @foreach( $tipoActivo as $collection )
+                                            <option value="{{$collection->id}}">{{$collection->nombre}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <label for="id_area">Selecciona un Tipo</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" id="nombre">
+                            <label for="nombre">Nombre</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" name="fecha" value="{{ old('fecha') }}" id="fecha">
+                            <label for="fecha">Fecha de compra</label>
+                        </div>
+                        
+                        <!--div id="switch-container">
+                            <input type="checkbox" id="switch-input">
+                            <label for="switch-input">Cámara</label>
+                        </div-->
 
-                    <div class="form-floating mb-3" id="upload-container">
-                        <input type="file" name="image" class="form-control" id="uploadInput">
-                    </div>
+                        <div class="form-floating mb-3" id="upload-container">
+                            <input type="file" name="image" class="form-control" id="uploadInput">
+                        </div>
 
-                    <input type="hidden" id="image-source" name="image_source">
-                    <input type="hidden" id="image-data" name="image_data">
-                    
-                    <div class="form-floating mb-3">
-                        <textarea class="form-control" name="descripcion" placeholder="Descripción corta del mueble" id="descripcion" style="height: 100px;"></textarea>
-                        <label for="descripcion">Descripcion</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <select class="form-select" id="id_area" name="id_area" aria-label="Selecciona una Area">
-                        <option value="" selected disabled>Selecciona el Area</option>
-                            @if( count($areas) > 0 )
-                                @foreach( $areas as $collection )
-                                    @if ( isset($idarea) )
-                                        @if ($collection->id === $idarea->id)
-                                            <option value="{{$collection->id}}" selected>{{$collection->nombre}}</option>    
+                        <input type="hidden" id="image-source" name="image_source">
+                        <input type="hidden" id="image-data" name="image_data">
+                        
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="id_area" name="id_area" aria-label="Selecciona una Area">
+                            <option value="" selected disabled>Selecciona el Area</option>
+                                @if( count($areas) > 0 )
+                                    @foreach( $areas as $collection )
+                                        @if ( isset($idarea) )
+                                            @if ($collection->id === $idarea->id)
+                                                <option value="{{$collection->id}}" selected>{{$collection->nombre}}</option>    
+                                            @else
+                                                <option value="{{$collection->id}}">{{$collection->nombre}}</option>
+                                            @endif
                                         @else
                                             <option value="{{$collection->id}}">{{$collection->nombre}}</option>
                                         @endif
-                                    @else
-                                        <option value="{{$collection->id}}">{{$collection->nombre}}</option>
-                                    @endif
-                                @endforeach
-                            @endif
-                        </select>
-                        <label for="id_area">Selecciona una Area</label>
-                    </div>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <label for="id_area">Selecciona una Area</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" name="descripcion" placeholder="Descripción corta del mueble" id="descripcion" style="height: 100px;"></textarea>
+                            <label for="descripcion">Descripcion</label>
+                        </div>
                     </div>
                 </div>
                 <div class="text-center">
