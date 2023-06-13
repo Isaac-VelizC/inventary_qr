@@ -11,4 +11,9 @@ class MoveHistory extends Model
     protected $table = "move_histories";
     protected $primaryKey = "id";
     protected $fillable = ['area_id', 'descripcion', 'movimiento'];
+
+    public function elemento()
+    {
+      return $this->belongsTo(item::class, 'area_id');
+    }
 }

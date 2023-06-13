@@ -14,9 +14,32 @@
                     <label class="col-sm-2 col-form-label">Detalles objeto</label>
                     <div class="col-sm-10">
                     <div class="form-floating mb-3">
+                        <select class="form-select" id="id_tipo" name="id_tipo" aria-label="Tipo de activo">
+                        <option value="" selected disabled>Selecciona el Tipo</option>
+                            @if( count($tipoActivo) > 0 )
+                                @foreach( $tipoActivo as $collection )
+                                @if ( $collection->id == old('tipo_id') )
+                                        <option value="{{$collection->id}}" selected>{{$collection->nombre}}</option>
+                                    @elseif ( $collection->id == $item->tipo_id && old('tipo_id') === null )
+                                        <option value="{{$collection->id}}" selected>{{$collection->nombre}}</option>
+                                    @else
+                                        <option value="{{$collection->id}}">{{$collection->nombre}}</option>
+                                    @endif
+                                @endforeach
+                            @endif
+                        </select>
+                        <label for="id_area">Selecciona un Tipo</label>
+                    </div>
+                    <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="nombre" value="{{ old('nombre', $item->nombre) }}" id="nombre">
                         <label for="nombre">Nombre</label>
                     </div>
+                    
+                    <div class="form-floating mb-3">
+                        <input type="date" class="form-control" name="fecha_compra" value="{{ old('fecha_compra', $item->fecha_compra_compra) }}" id="fecha_compra">
+                        <label for="fecha_compra">Fecha de compra</label>
+                    </div>
+                    
                     <div class="form-floating mb-3">
                         <input type="file" name="image" class="form-control" id="uploadInput">
                     </div>

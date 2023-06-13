@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Area;
 use App\Models\Item;
+use App\Models\MoveHistory;
 use App\Models\Tipo;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Carbon\Carbon;
-use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -101,13 +99,15 @@ class ItemController extends Controller
 
     public function edit($id)
     {
+        $tipoActivo = Tipo::all();
         // retrieve item
         $item = Item::find($id);
         // retrieve areas
         $areas = Area::all();
         return view('items.edit')
             ->with('item', $item)
-            ->with('areas', $areas);
+            ->with('areas', $areas)
+            ->with('tipoActivo', $tipoActivo);
     }
 
     public function update(Request $request, $id)
@@ -123,7 +123,18 @@ class ItemController extends Controller
         $item = Item::find($id);
         $item->nombre = $request->nombre;
         $item->descripcion = $request->descripcion;
+        if ($item->area_id != $request->id_area) {
+            $nomArea = Area::find($request->id_area);
+            $movi = new MoveHistory();
+            $movi->area_id = $id;
+            $movi->descripcion = 'Se movio de '.$item->area->nombre.' a '.$nomArea->nombre;
+            $movi->save();
+        }
         $item->area_id = $request->id_area;
+        $item->tipo_id = $request->id_tipo;
+        if ($request->fecha_compra != null) {
+            $item->fecha_compra = $request->fecha_compra;
+        }
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -151,23 +162,27 @@ class ItemController extends Controller
         return view('items.show')->with('success', 'Mueble actualizado correctamente.')->with('item', $item)->with('miQr', $miQr);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $item = Item::find($id);
         /* generate redirect url (redirect to parent collection) */
-        $url = 'area/' . $item->area_id . '/show';
+        //$url = 'area/' . $item->area_id . '/show';
         $nombresImagenes = [
             $item->image,
         ];
-        $item->delete();
         // Elimina las imágenes del servidor
         foreach ($nombresImagenes as $nombreImagen) {
             $rutaImagen = public_path('img\fotos'.$nombreImagen);
             if (File::exists($rutaImagen)) {
                 File::delete($rutaImagen);
             }
-        }
-        return redirect($url)->with('success', 'Mueble eliminado correctamente');
+        };
+        $item->user_baja = $request->encargado;
+        $item->descripcion = $request->descripcion;
+        $item->fecha_baja = Carbon::now();
+        $item->estado = 0;
+        $item->update();
+        return redirect('/')->with('success', 'Mueble eliminado correctamente');
     }
 
     public function vistaQR($id)
@@ -235,5 +250,12 @@ class ItemController extends Controller
             return Response::download($ruta_imagen, $nombre);
         else
             abort(404, 'Imagen no encontrada');
+    }
+
+    public function history($id)
+    {
+        $coll = MoveHistory::find($id);
+        $hitory = MoveHistory::where('area_id', $id)->get();
+        return view('items.history')->with('hitory', $hitory)->with('item', $coll);
     }
 }

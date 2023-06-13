@@ -12,6 +12,8 @@
                 </div>
                 <div class="col-md-6">
                     <h5 class="card-title">Area: {{$item->area->nombre}}</h5>
+                    <h6><b>Tipo:</b> {{$item->tipo->nombre}}</h6>
+                    <h6><b>fecha compra:</b> {{$item->fecha_compra}}</h6>
                     <h6><b>Encargado:</b> {{$item->area->encargado}}</h6>
                     <p>{{$item->descripcion}}</p>
                 </div>
@@ -30,11 +32,11 @@
                   </a>
             </div>
             <div class="col-md-4">
-              <form action="{{ url('admin/item/'.$item->id)}}" method="post">
+              <!--form action="{{ url('admin/item/'.$item->id)}}" method="post">
                 <input name="_method" type="hidden" value="delete">
                 <input class="btn btn-outline-danger" type="submit" value="Borrar" id="btnDelete">
                   {{ csrf_field() }}
-              </form>
+              </form-->
             </div>
             <div class="col-md-4">
               <a class="btn btn-outline-primary" id="btnimgGraficaBarras">

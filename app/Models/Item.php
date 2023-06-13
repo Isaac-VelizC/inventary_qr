@@ -16,4 +16,9 @@ class Item extends Model
     {
       return $this->belongsTo(Area::class);
     }
+    
+    public function tipo()
+    {
+      return $this->belongsTo(Tipo::class);
+    }
 }

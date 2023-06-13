@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Area;
 use App\Models\Item;
+use App\Models\Tipo;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
@@ -39,16 +41,15 @@ class AreaController extends Controller
 
     public function show($id)
     {
+        $tipo = Tipo::all();
         $area = Area::find($id);
-        return view('areas.show')
-          ->with('area', $area);
+        return view('areas.show')->with('area', $area)->with('tipo', $tipo);
     }
 
     public function edit($id)
     {
         $area = Area::find($id);
-        return view('areas.edit')
-          ->with('area', $area);
+        return view('areas.edit')->with('area', $area);
     }
 
     public function update(Request $request, $id)
@@ -76,6 +77,21 @@ class AreaController extends Controller
         $area = Area::find($id);
         $area->delete();
         return redirect('/')->with('success', 'Area eliminada con éxito');
+    }
+
+    
+    public function generarPDF(Request $request)
+    {
+        $area = Area::find($request->area);
+        if ($request->has('id_tipo')) {
+            $categoriaSeleccionada = $request->input('id_tipo');
+            $datosFiltrados = Item::where('tipo_id', $categoriaSeleccionada)->where('area_id', $request->area)->get();
+        } else {
+            $datosFiltrados = Item::where('area_id', $request->area)->get();
+        }
+        
+        $pdf = Pdf::loadView('areas.pdf', compact('datosFiltrados', 'area'));
+        return $pdf->download('archivo.pdf');
     }
 
 }
