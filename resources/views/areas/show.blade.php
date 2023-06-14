@@ -78,7 +78,7 @@
                                     <td>{{$item->nombre}}</td>
                                     <td style="display: none">{{$item->tipo_id}}</td>
                                     <td>{{ \Carbon\Carbon::parse($item->fecha_compra)->format('d/m/Y') }}</td>
-                                    <td>{{ Str::limit($item->descripcion, 25, '...')}}</td>
+                                    <td>{{ Str::limit($item->descripcion, 15, '...')}}</td>
                                     <td>{{$item->codigo}}</td>
                                     @if ($item->estado == '1')
                                         <td><a type="button" data-toggle="modal" data-target="#modal-familiar"><span class="badge bg-success">Activo</span></a></td>

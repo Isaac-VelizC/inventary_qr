@@ -19,26 +19,21 @@
                 </div>
                 <div class="col-md-4" id="graficoBarras" style="margin-left: auto; margin-right: auto;">
                   <br>
-                  {{ $miQr }}
-                  <p>Cod.{{$item->codigo}}</p>
+                  <div style="text-align: center">
+                    {{ $miQr }}
+                  </div>
+                  <p style="text-align: center">Cod.{{$item->codigo}}</p>
                 </div>
             </div>
           </div>
           <br>
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <a class="btn btn-outline-primary" href="{{ url('admin/item/'.$item->id.'/edit')}}">
                     <i class="bi bi-collection">Editar</i>
                   </a>
             </div>
-            <div class="col-md-4">
-              <!--form action="{{ url('admin/item/'.$item->id)}}" method="post">
-                <input name="_method" type="hidden" value="delete">
-                <input class="btn btn-outline-danger" type="submit" value="Borrar" id="btnDelete">
-                  {{ csrf_field() }}
-              </form-->
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
               <a class="btn btn-outline-primary" id="btnimgGraficaBarras">
                   <i class="bi bi-print">Crear IMG</i>
               </a>
@@ -48,7 +43,7 @@
           <!-- End Card with header and footer -->
       </div>
 
-      <form id="image-form" method="post" action="{{ url('admin/printQR/') }}" enctype="multipart/form-data">
+      <form id="image-form" method="post" action="{{ url('admin/printQR/') }}" enctype="multipart/form-data" style="display:none;">
         @csrf
         <input type="hidden" name="id_item" value="{{$item->id}}">
         <input type="hidden" name="codigo" value="{{$item->codigo}}">
@@ -80,6 +75,11 @@
   var imagePreview = document.getElementById('image-preview');
   var imageDataInput = document.getElementById('image-data');
   var imageForm = document.getElementById('image-form');
+  var btnimgGraficaBarras = document.getElementById('btnimgGraficaBarras');
+
+  btnimgGraficaBarras.addEventListener('click', function() {
+    imageForm.style.display = 'block';
+  });
 
   $(document).ready(function(){
       $('#btnimgGraficaBarras').click(function(){
@@ -96,6 +96,7 @@
         imageForm.sunmit();
       });	
     }
+
 </script>
 
 @endsection

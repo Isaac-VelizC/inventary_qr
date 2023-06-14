@@ -255,7 +255,7 @@ class ItemController extends Controller
     public function history($id)
     {
         $coll = Item::find($id);
-        $hitory = MoveHistory::where('area_id', $id)->get();
+        $hitory = MoveHistory::where('item_id', $id)->get();
         return view('items.history')->with('hitory', $hitory)->with('item', $coll);
     }
 }

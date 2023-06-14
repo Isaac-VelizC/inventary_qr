@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Reporte PDf</title>
 </head>
 <body>
-    
 <section class="section dashboard">
     <div class="row">
         <!-- Left side columns -->
@@ -22,7 +21,6 @@
                         <table id="tabla-items" class="table table-borderless datatable">
                             <thead>
                                 <tr>
-                                <th scope="col">#</th>
                                 <th scope="col">Mueble</th>
                                 <th scope="col">Fecha de compra</th>
                                 <th scope="col">Descripción</th>
@@ -34,7 +32,6 @@
                             @foreach($datosFiltrados as $item)
                             <tbody>
                                 <tr>
-                                    <th scope="row">#{{$item->id}}</th>
                                     <td>{{$item->nombre}}</td>
                                     <td style="display: none">{{$item->tipo_id}}</td>
                                     <td>{{ \Carbon\Carbon::parse($item->fecha_compra)->format('d/m/Y') }}</td>
