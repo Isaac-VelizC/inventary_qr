@@ -36,7 +36,7 @@
                     </div>
                     
                     <div class="form-floating mb-3">
-                        <input type="date" class="form-control" name="fecha_compra" value="{{ old('fecha_compra', $item->fecha_compra_compra) }}" id="fecha_compra">
+                        <input type="date" class="form-control" name="fecha_compra" value="{{ old('fecha_compra', $item->fecha_compra) }}" id="fecha_compra">
                         <label for="fecha_compra">Fecha de compra</label>
                     </div>
                     

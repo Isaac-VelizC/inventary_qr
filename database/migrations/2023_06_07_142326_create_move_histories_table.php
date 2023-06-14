@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('move_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('area_id')->nullable();
-            $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
+            $table->unsignedBigInteger('item_id')->nullable();
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->string('descripcion', 36)->nullable();
             $table->dateTime('movimiento')->nullable()->default(now()->toDateTimeString());
             $table->timestamps();

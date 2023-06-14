@@ -37,20 +37,24 @@
                 <div class="col-12">
                     <div class="card recent-sales">
                         <div class="filter">
-                        <form action="{{ url('admin/generar-pdf') }}" method="GET">
-                            @csrf
-                            <input type="hidden" name="area" value="{{$area->id}}">
-                            <select class="form-select" id="categoria-filtro" name="id_tipo" aria-label="Tipo de activo">
-                                <option value="" selected disabled>Selecciona el Tipo</option>
-                                @if( count($tipo) > 0 )
-                                    @foreach( $tipo as $collection )
-                                        <option value="{{$collection->id}}">{{$collection->nombre}}</option>
-                                    @endforeach
-                                @endif
-                            </select>
-                            <button type="submit">Generar PDF</button>
-                        </form>
+                            <form action="{{ url('admin/generar-pdf') }}" method="GET">
+                                @csrf
+                                <input type="hidden" name="area" value="{{$area->id}}">
+                                <div class="input-group mb-2">
+                                    <select class="form-control" id="categoria-filtro" name="id_tipo" aria-label="Tipo de activo">
+                                        <option value="" selected disabled>Selecciona el Tipo</option>
+                                        @if( count($tipo) > 0 )
+                                            <option value="00">Todo...</option>
+                                            @foreach( $tipo as $collection )
+                                                <option value="{{$collection->id}}">{{$collection->nombre}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    <span class="input-group-text"><button class="btn btn-light" type="submit">PDF</button></span>
+                                </div>
+                            </form>
                         </div>
+                        <br>
                     <div class="card-body scrollable-table">
                         <h5 class="card-title">Muebles en el Area <span>| {{$area->nombre}}</span></h5>
                         @if( count($area->items) > 0 )
@@ -116,8 +120,7 @@
         var filas = tablaItems.getElementsByTagName('tr');
         for (var i = 1; i < filas.length; i++) { // Comienza en 1 para omitir la fila de encabezado
             var categoriaItem = filas[i].getElementsByTagName('td')[1].textContent; // Cambiar el índice a la columna de categoría (tipo_id)
-
-            if (categoriaSeleccionada === '' || categoriaSeleccionada === categoriaItem) {
+            if ( categoriaSeleccionada === '' || categoriaSeleccionada === '00' || categoriaSeleccionada === categoriaItem ) {
                 filas[i].style.display = ''; // Mostrar la fila si la categoría coincide o no se ha seleccionado ninguna categoría
             } else {
                 filas[i].style.display = 'none'; // Ocultar la fila si la categoría no coincide

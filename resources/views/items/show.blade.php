@@ -13,7 +13,7 @@
                 <div class="col-md-6">
                     <h5 class="card-title">Area: {{$item->area->nombre}}</h5>
                     <h6><b>Tipo:</b> {{$item->tipo->nombre}}</h6>
-                    <h6><b>fecha compra:</b> {{$item->fecha_compra}}</h6>
+                    <h6><b>fecha compra:</b> {{ \Carbon\Carbon::parse($item->fecha_compra)->format('d/m/Y') }}</h6>
                     <h6><b>Encargado:</b> {{$item->area->encargado}}</h6>
                     <p>{{$item->descripcion}}</p>
                 </div>

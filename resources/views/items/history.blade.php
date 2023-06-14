@@ -6,7 +6,7 @@
     <div class="col-lg-6" style="margin: 0 auto;">
         <!-- Card with header and footer -->
         <div class="card">
-            <div class="card-header" style="text-align: center">Historial de {{ $item->elemento->nombre }}</div>
+            <div class="card-header" style="text-align: center">Historial de {{ $item->nombre }}</div>
                 <div class="card-body">
                     @foreach ($hitory as $item)
                         <h5 class="card-title">{{$item->descripcion}}</h5>

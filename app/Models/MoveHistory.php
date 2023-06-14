@@ -10,7 +10,7 @@ class MoveHistory extends Model
     use HasFactory;
     protected $table = "move_histories";
     protected $primaryKey = "id";
-    protected $fillable = ['area_id', 'descripcion', 'movimiento'];
+    protected $fillable = ['item_id', 'descripcion', 'movimiento'];
 
     public function elemento()
     {

@@ -126,7 +126,7 @@ class ItemController extends Controller
         if ($item->area_id != $request->id_area) {
             $nomArea = Area::find($request->id_area);
             $movi = new MoveHistory();
-            $movi->area_id = $id;
+            $movi->item_id = $id;
             $movi->descripcion = 'Se movio de '.$item->area->nombre.' a '.$nomArea->nombre;
             $movi->save();
         }
@@ -254,7 +254,7 @@ class ItemController extends Controller
 
     public function history($id)
     {
-        $coll = MoveHistory::find($id);
+        $coll = Item::find($id);
         $hitory = MoveHistory::where('area_id', $id)->get();
         return view('items.history')->with('hitory', $hitory)->with('item', $coll);
     }
