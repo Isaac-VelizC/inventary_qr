@@ -36,7 +36,7 @@ class AreaController extends Controller
         $coll->descripcion = $request->descripcion;
         $coll->encargado = $request->encargado;
         $coll->save();
-        return redirect('/')->with('success', 'Registrado con éxito.');;
+        return redirect('/')->with('success', 'Registrado con éxito.');
     }
 
     public function show($id)
