@@ -21,3 +21,7 @@ class UserSeeder extends Seeder
         ]);
     }
 }
+
+
+//Usuario: Upds@gmail.com
+//Contraseña: 12345

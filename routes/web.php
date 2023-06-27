@@ -42,9 +42,7 @@ Route::middleware(['auth', 'admin'])->namespace('Admin')->prefix('admin')->group
     Route::get('/qrcode/{id}', [QrController::class, 'show'])->name('qrcode.show');
     Route::post('/printQR', [ItemController::class, 'printQR']);
     Route::get('/printPdf/{id}', [ItemController::class, 'printPDf']);
-
     Route::get('/generar-pdf', [AreaController::class, 'generarPDF']);
-
 });
 
 Route::get('/vistaQR/{id}', [ItemController::class, 'vistaQR']);
