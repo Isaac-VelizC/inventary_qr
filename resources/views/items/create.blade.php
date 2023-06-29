@@ -65,11 +65,17 @@
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" id="nombre">
                             <label for="nombre">Nombre</label>
+                            @error('nombre')
+                                <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
                         
                         <div class="form-floating mb-3">
                             <input type="date" class="form-control" name="fecha" value="{{ old('fecha') }}" id="fecha">
                             <label for="fecha">Fecha de compra</label>
+                            @error('fecha')
+                                <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
                         
                         <!--div id="switch-container">
@@ -102,11 +108,17 @@
                                 @endif
                             </select>
                             <label for="id_area">Selecciona una Area</label>
+                            @error('id_area')
+                                <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="form-floating mb-3">
                             <textarea class="form-control" name="descripcion" placeholder="Descripción corta del mueble" id="descripcion" style="height: 100px;"></textarea>
                             <label for="descripcion">Descripcion</label>
+                            @error('descripcion')
+                                <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                 </div>

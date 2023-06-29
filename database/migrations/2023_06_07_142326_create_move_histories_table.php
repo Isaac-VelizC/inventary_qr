@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('item_id')->nullable();
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
-            $table->string('descripcion', 36)->nullable();
+            $table->string('descripcion', 100)->nullable();
             $table->dateTime('movimiento')->nullable()->default(now()->toDateTimeString());
             $table->timestamps();
         });

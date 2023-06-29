@@ -28,16 +28,25 @@
                                 @endforeach
                             @endif
                         </select>
-                        <label for="id_area">Selecciona un Tipo</label>
+                        <label for="id_tipo">Selecciona un Tipo</label>
+                        @error('id_tipo')
+                            <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="nombre" value="{{ old('nombre', $item->nombre) }}" id="nombre">
                         <label for="nombre">Nombre</label>
+                        @error('nombre')
+                            <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
                     
                     <div class="form-floating mb-3">
                         <input type="date" class="form-control" name="fecha_compra" value="{{ old('fecha_compra', $item->fecha_compra) }}" id="fecha_compra">
                         <label for="fecha_compra">Fecha de compra</label>
+                        @error('fecha_compra')
+                            <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
                     
                     <div class="form-floating mb-3">
@@ -46,6 +55,9 @@
                     <div class="form-floating mb-3">
                         <textarea class="form-control" name="descripcion" placeholder="Descripción corta del mueble" id="descripcion" style="height: 100px;">{{ old('descripcion', $item->descripcion) }}</textarea>
                         <label for="descripcion">Descripcion</label>
+                        @error('descripcion')
+                            <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="form-floating mb-3">
                         <select class="form-select" id="id_area" name="id_area" aria-label="Selecciona una Area">
@@ -63,6 +75,9 @@
                             @endif
                         </select>
                         <label for="id_area">Selecciona una Area</label>
+                        @error('id_area')
+                            <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
                     </div>
                 </div>

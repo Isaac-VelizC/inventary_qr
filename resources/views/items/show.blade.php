@@ -29,13 +29,20 @@
           <br>
           <div class="row">
             <div class="col-md-6">
+              @if($item->estado != 0)
                 <a class="btn btn-outline-primary" href="{{ url('admin/item/'.$item->id.'/edit')}}">
-                    <i class="bi bi-collection">Editar</i>
-                  </a>
+                  <i class="bi bi-pen"></i> Editar
+                </a>
+              @else
+                <a type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#modal-show-inactivo">
+                  <i class="bi bi-clipboard-minus"></i> Inactivo
+                </a>
+                  @include('items.show_inactivo')
+              @endif
             </div>
             <div class="col-md-6">
               <a class="btn btn-outline-primary" id="btnimgGraficaBarras">
-                  <i class="bi bi-print">Crear IMG</i>
+                  <i class="bi bi-card-image"></i> Crear IMG
               </a>
             </div>
           </div>
@@ -69,6 +76,11 @@
 <script src="{{ asset('imagenseccion/librerias/bootstrap4/bootstrap.min.js')}}"></script>
 <script src="{{ asset('imagenseccion/librerias/plotly-latest.min.js')}}" charset="utf-8"></script>
 <script src="{{ asset('imagenseccion/librerias/htmlToCanvas.js')}}"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+
 
 <script type="text/javascript">
 

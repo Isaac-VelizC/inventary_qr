@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->String('qr_code')->nullable();
             $table->String('codigo', 50);
-            $table->text('descripcion')->nullable();
+            $table->text('descripcion', 50)->nullable();
             $table->dateTime('fecha_compra');
             $table->dateTime('fecha_baja')->nullable();
             $table->string('user_baja')->nullable();

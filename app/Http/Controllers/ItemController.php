@@ -27,7 +27,7 @@ class ItemController extends Controller
             return view('items.create')->with('areas', $areas)->with('tipoActivo', $tipoActivo);;
         } else {
             $idarea = Area::find($id);
-            return view('items.create')->with('areas', $areas)->with('tipoActivo', $tipoActivo);
+            return view('items.create')->with('areas', $areas)->with('tipoActivo', $tipoActivo)->with('idarea', $idarea);
         }
     }
 
@@ -93,7 +93,7 @@ class ItemController extends Controller
                               ->color(0, 0, 255)
                               ->margin(0.5)  //defino el margen
                               ->generate(url('vistaQR/'.$item->id));
-        //redirect
+        
         return view('items.show')->with('item', $item)->with('rutaimg', $rutaimg)->with('miQr', $miQr);
     }
 
@@ -115,7 +115,6 @@ class ItemController extends Controller
         // Validate
         $this->validate($request, [
             'nombre' => 'required',
-            'descripcion' => 'required',
             'id_area' => 'required'
         ]);
 
@@ -165,24 +164,26 @@ class ItemController extends Controller
     public function destroy(Request $request, $id)
     {
         $item = Item::find($id);
-        /* generate redirect url (redirect to parent collection) */
-        //$url = 'area/' . $item->area_id . '/show';
-        $nombresImagenes = [
+        /*$nombresImagenes = [
             $item->image,
         ];
-        // Elimina las imágenes del servidor
+        
         foreach ($nombresImagenes as $nombreImagen) {
             $rutaImagen = public_path('img\fotos'.$nombreImagen);
             if (File::exists($rutaImagen)) {
                 File::delete($rutaImagen);
             }
-        };
-        $item->user_baja = $request->encargado;
-        $item->descripcion = $request->descripcion;
-        $item->fecha_baja = Carbon::now();
-        $item->estado = 0;
-        $item->update();
-        return redirect('/')->with('success', 'Mueble eliminado correctamente');
+        };*/
+        if ($request->filled('encargado') || $request->filled('descripcion')) {
+            $item->user_baja = $request->encargado;
+            $item->descripcion = $request->descripcion;
+            $item->fecha_baja = Carbon::now();
+            $item->estado = 0;
+            $item->update();
+            return redirect('/')->with('success', 'Mueble eliminado correctamente');
+        } else {
+            return redirect('/')->with('success', 'No existe datos para dar de baja');
+        }
     }
 
     public function vistaQR($id)
