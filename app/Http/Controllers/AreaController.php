@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use App\Models\Item;
 use App\Models\Tipo;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
@@ -41,9 +42,10 @@ class AreaController extends Controller
 
     public function show($id)
     {
+        $user = User::find(auth()->user()->id);
         $tipo = Tipo::all();
         $area = Area::find($id);
-        return view('areas.show')->with('area', $area)->with('tipo', $tipo);
+        return view('areas.show')->with('area', $area)->with('tipo', $tipo)->with('user', $user);
     }
 
     public function edit($id)

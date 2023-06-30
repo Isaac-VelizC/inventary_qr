@@ -81,7 +81,7 @@
                                     <td>{{ Str::limit($item->descripcion, 15, '...')}}</td>
                                     <td>{{$item->codigo}}</td>
                                     @if ($item->estado == '1')
-                                        <td><a type="button" data-toggle="modal" data-target="#modal-familiar"><span class="badge bg-success">Activo</span></a></td>
+                                        <td><a type="button" data-toggle="{{$user->permiso->dar_baja_item == 0 ? '' : 'modal'}}" data-target="#modal-familiar"><span class="badge bg-success">Activo</span></a></td>
                                         @include('areas.modal')
                                     @else
                                         <td><span class="badge bg-danger">Inactivo</span></td>

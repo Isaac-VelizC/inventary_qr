@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -43,6 +44,14 @@ Route::middleware(['auth', 'admin'])->namespace('Admin')->prefix('admin')->group
     Route::post('/printQR', [ItemController::class, 'printQR']);
     Route::get('/printPdf/{id}', [ItemController::class, 'printPDf']);
     Route::get('/generar-pdf', [AreaController::class, 'generarPDF']);
+    ///Usuarios
+    Route::get('/users', [UsersController::class, 'index']);
+    Route::get('/users/create/{id}', [UsersController::class, 'create']);
+    Route::post('/users', [UsersController::class, 'store']);
+    Route::get('/users/{id}/edit', [UsersController::class, 'edit']);
+    Route::post('/users/{id}/edit', [UsersController::class, 'update']);
+    Route::post('/users/{id}/delete', [UsersController::class, 'destroy']);
+    Route::get('/users/{id}/show',  [UsersController::class, 'show']);
 });
 
 Route::get('/vistaQR/{id}', [ItemController::class, 'vistaQR']);

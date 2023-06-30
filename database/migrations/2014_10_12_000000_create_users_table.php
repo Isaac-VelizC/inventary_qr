@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('admin')->default(false);
             $table->string('estado', 5)->default('A');
+            $table->string('tipo_user')->default('0');
             $table->rememberToken();
             $table->timestamps();
         });

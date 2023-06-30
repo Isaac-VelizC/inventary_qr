@@ -53,6 +53,11 @@
                         </li>
                     @endif-->
                 @else
+                    @if (Auth::user()->permiso->crear_user === 1)
+                        <li class="nav-item">
+                            <a class="nav-link"  style="color:white" href="{{ url('admin/users') }}"><i class="bi bi-person-lines-fill"></i> Usuarios</a>
+                        </li>
+                    @endif
                     <li class="nav-item dropdown pe-3">
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                             <img src="{{ asset('img/logo_color.png')}}" alt="Profile" class="rounded-circle">
