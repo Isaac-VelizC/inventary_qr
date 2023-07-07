@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
+    private $validar = [
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+    ];
+
     public function index() {
         $users = User::all();
         return view('users.index')->with('users', $users);
@@ -20,12 +26,19 @@ class UsersController extends Controller
     }
 
     public function store(Request $request) {
-        dd($request);
-        User::create([
+        
+        $request->validate($this->validar);
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        $permiso = Permiso::updateOrCreate(
+            ['user_id' => $user->id],
+        );
+        $permiso->save();
+
         return redirect('admin/users');
     }
 
@@ -69,6 +82,6 @@ class UsersController extends Controller
             $permiso = Permiso::where('user_id', $user->id);
             $permiso->delete();
         $user->delete();
-        return back();
+        return back()->with('success', 'Se borro la Cuenta');
     }
 }

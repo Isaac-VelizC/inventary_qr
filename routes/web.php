@@ -50,7 +50,7 @@ Route::middleware(['auth', 'admin'])->namespace('Admin')->prefix('admin')->group
     Route::post('/users', [UsersController::class, 'store']);
     Route::get('/users/{id}/edit', [UsersController::class, 'edit']);
     Route::post('/users/{id}/edit', [UsersController::class, 'update']);
-    Route::post('/users/{id}/delete', [UsersController::class, 'destroy']);
+    Route::delete('/users/{id}/delete', [UsersController::class, 'destroy']);
     Route::get('/users/{id}/show',  [UsersController::class, 'show']);
 });
 

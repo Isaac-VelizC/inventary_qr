@@ -6,12 +6,12 @@
     <div class="col-lg-8" style="margin: 0 auto;">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Vista de <span>| Crear nueva cuenta</span></h5>
+            <h5 class="card-title">Vista de <span>| Crear nueva cuenta</span></h5>
             <!-- Vertical Form -->
-            <form action="{{ url('admin/area')}}" method="POST" role="form text-left">
+            <form action="{{ url('admin/users')}}" method="POST" role="form text-left">
                 @csrf
                 @if($errors->any())
-                    <div class="mt-3  alert alert-primary alert-dismissible fade show" role="alert">
+                    <div class="mt-3  alert alert-danger alert-dismissible fade show" role="alert">
                         <span class="alert-text text-black">
                         {{$errors->first()}}</span>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
@@ -29,22 +29,22 @@
                     @enderror
                 </div>
                 <div class="col-12">
-                        <label for="encargado" class="form-label"> Correo Electronico</label>
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                    <label for="encargado" class="form-label"> Correo Electronico</label>
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="col-12">
-                        <label for="password" class="form-label"> Contraseña</label>
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                    <label for="password" class="form-label"> Contraseña</label>
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                     <div class="col-12">
                         <label for="password-confirm" class="form-label">{{ __('Confirmar Contraseña') }}</label>
