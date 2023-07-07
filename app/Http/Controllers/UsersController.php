@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Permiso;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -18,24 +20,55 @@ class UsersController extends Controller
     }
 
     public function store(Request $request) {
-        return view('users.index');
+        dd($request);
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+        return redirect('admin/users');
     }
 
     public function show($id) {
         $user = User::find($id);
-        return view('users.show', compact('user'));
+        $permisos = Permiso::where('user_id', $user->id)->first();
+        return view('users.show', compact('user', 'permisos'));
     }
     
     public function edit($id) {
         $edit = User::find($id);
-        return view('users.edit', compact('edit'));
+        $permisos = Permiso::where('user_id', $edit->id)->first();
+        return view('users.edit', compact('edit', 'permisos'));
     }
 
     public function update(Request $request, $id) {
-        return view('users.index');
+        $user = User::find($id); // Reemplaza esto con la forma adecuada de obtener el ID de usuario
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->update();
+        // Obtener los permisos seleccionados
+        $permisosSeleccionados = $request->input('permisos', []);
+
+        // Guardar los permisos en la base de datos
+        $permiso = Permiso::updateOrCreate(
+            ['user_id' => $id], // Buscar el permiso por el ID de usuario
+            [
+                'dar_baja_item' => in_array('dar_baja_item', $permisosSeleccionados),
+                'crear_user' => in_array('crear_user', $permisosSeleccionados),
+                'exportar' => in_array('exportar', $permisosSeleccionados),
+                'editar_area' => in_array('editar_area', $permisosSeleccionados),
+                'borrar_area' => in_array('borrar_area', $permisosSeleccionados),
+            ]
+        );
+        $permiso->save();
+        return redirect('admin/users')->with('success', 'Cuenta de usuario actualizado');
     }
 
     public function destroy($id) {
+        $user = User::find($id);
+            $permiso = Permiso::where('user_id', $user->id);
+            $permiso->delete();
+        $user->delete();
         return back();
     }
 }

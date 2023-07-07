@@ -2,11 +2,26 @@
 
 @section('content')
 
+<style>
+    @media screen and (max-width: 767px) {
+        .scrollable-table {
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    }
+
+</style>
+
 <section class="section">
     <div class="col-12">
         <div class="card top-selling">
-            <div class="card-body pb-0">
-                <h5 class="card-title">Cuentas de Usuario <span>| Lista</span></h5>
+            <div class="card-body pb-0 scrollable-table">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <h5 class="card-title">Cuentas de Usuario <span>| Lista</span></h5>
+                    <a href="{{ url('admin/users/create') }}" class="btn btn-outline-success smaller-button"><i class="bi bi-box-arrow-down"></i> 
+                        <span class="label-text">Nuevo</span>
+                    </a>
+                </div>
                 <table class="table table-borderless">
                     <thead>
                         <tr>

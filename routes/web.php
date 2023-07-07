@@ -46,7 +46,7 @@ Route::middleware(['auth', 'admin'])->namespace('Admin')->prefix('admin')->group
     Route::get('/generar-pdf', [AreaController::class, 'generarPDF']);
     ///Usuarios
     Route::get('/users', [UsersController::class, 'index']);
-    Route::get('/users/create/{id}', [UsersController::class, 'create']);
+    Route::get('/users/create', [UsersController::class, 'create']);
     Route::post('/users', [UsersController::class, 'store']);
     Route::get('/users/{id}/edit', [UsersController::class, 'edit']);
     Route::post('/users/{id}/edit', [UsersController::class, 'update']);
