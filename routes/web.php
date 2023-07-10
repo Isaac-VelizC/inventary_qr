@@ -3,6 +3,7 @@
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UsersController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -52,6 +53,9 @@ Route::middleware(['auth', 'admin'])->namespace('Admin')->prefix('admin')->group
     Route::post('/users/{id}/edit', [UsersController::class, 'update']);
     Route::delete('/users/{id}/delete', [UsersController::class, 'destroy']);
     Route::get('/users/{id}/show',  [UsersController::class, 'show']);
+
+    $user = User::find(Auth()->user()->id);
+
 });
 
 Route::get('/vistaQR/{id}', [ItemController::class, 'vistaQR']);
