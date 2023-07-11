@@ -9,19 +9,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 Auth::routes();
 
-//Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'admin'])->namespace('Admin')->prefix('admin')->group(function () {
@@ -39,9 +28,9 @@ Route::middleware(['auth', 'admin'])->namespace('Admin')->prefix('admin')->group
     Route::post('/item/{id}/delete', [ItemController::class, 'destroy']);
     Route::get('/item/{id}/show',  [ItemController::class, 'show']);
     Route::get('/item/{id}/history',  [ItemController::class, 'history']);
-    Route::post('area/{id}/qr', [QrController::class, 'show']);
-    Route::post('area/{id}/qr/create', [QrController::class, 'create']);
-    Route::get('/qrcode/{id}', [QrController::class, 'show'])->name('qrcode.show');
+    //Route::post('area/{id}/qr', [QrController::class, 'show']);
+    //Route::post('area/{id}/qr/create', [QrController::class, 'create']);
+    //Route::get('/qrcode/{id}', [QrController::class, 'show'])->name('qrcode.show');
     Route::post('/printQR', [ItemController::class, 'printQR']);
     Route::get('/printPdf/{id}', [ItemController::class, 'printPDf']);
     Route::get('/generar-pdf', [AreaController::class, 'generarPDF']);
@@ -53,8 +42,6 @@ Route::middleware(['auth', 'admin'])->namespace('Admin')->prefix('admin')->group
     Route::post('/users/{id}/edit', [UsersController::class, 'update']);
     Route::delete('/users/{id}/delete', [UsersController::class, 'destroy']);
     Route::get('/users/{id}/show',  [UsersController::class, 'show']);
-
-    $user = User::find(Auth()->user()->id);
 
 });
 

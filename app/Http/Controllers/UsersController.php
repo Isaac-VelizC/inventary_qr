@@ -32,6 +32,7 @@ class UsersController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'admin' => true,
         ]);
 
         $permiso = Permiso::updateOrCreate(

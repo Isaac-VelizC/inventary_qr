@@ -34,14 +34,18 @@
                         <div class="filter">
                           <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li><a class="dropdown-item" href="{{ url('admin/area/'.$collection->id.'/edit')}}">Editar</a></li>
-                            <li>
-                              <form action="{{ url('admin/area/'.$collection->id)}}" method="post">
-                                @csrf
-                                <input name="_method" type="hidden" value="delete">
-                                <input class="dropdown-item" type="submit" id="btnDelete" value="Borrar">
-                              </form>
-                            </li>
+                            @if ($user->permiso->editar_area == 1)
+                              <li><a class="dropdown-item" href="{{ url('admin/area/'.$collection->id.'/edit')}}">Editar</a></li>
+                            @endif
+                            @if ($user->permiso->borrar_area == 1)
+                              <li>
+                                <form action="{{ url('admin/area/'.$collection->id)}}" method="post">
+                                  @csrf
+                                  <input name="_method" type="hidden" value="delete">
+                                  <input class="dropdown-item" type="submit" id="btnDelete" value="Borrar">
+                                </form>
+                              </li>
+                            @endif
                           </ul>
                         </div>
                         <a href="{{ url ('admin/area/'.$collection->id.'/show')}}">

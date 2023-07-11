@@ -50,7 +50,11 @@
                                             @endforeach
                                         @endif
                                     </select>
-                                    <span class="input-group-text"><button class="btn btn-light" type="submit">PDF</button></span>
+                                    @if ($user->permiso->exportar == 1)
+                                        <span class="input-group-text">
+                                            <button class="btn btn-light" type="submit">PDF</button>
+                                        </span>
+                                    @endif
                                 </div>
                             </form>
                         </div>
