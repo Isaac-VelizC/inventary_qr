@@ -18,11 +18,13 @@ class UsersController extends Controller
 
     public function index() {
         $users = User::all();
-        return view('users.index')->with('users', $users);
+        $userAuth = User::find(auth()->user()->id);
+        return $userAuth->permiso->crear_user == 1 ? view('users.index')->with('users', $users) : redirect('/admin/error');
     }
 
     public function create() {
-        return view('users.create');
+        $userAuth = User::find(auth()->user()->id);
+        return $userAuth->permiso->crear_user == 1 ? view('users.create') : redirect('/admin/error');
     }
 
     public function store(Request $request) {
@@ -52,7 +54,8 @@ class UsersController extends Controller
     public function edit($id) {
         $edit = User::find($id);
         $permisos = Permiso::where('user_id', $edit->id)->first();
-        return view('users.edit', compact('edit', 'permisos'));
+        $userAuth = User::find(auth()->user()->id);
+        return $userAuth->permiso->crear_user == 1 ? view('users.edit', compact('edit', 'permisos')) : redirect('/admin/error');
     }
 
     public function update(Request $request, $id) {
@@ -83,6 +86,7 @@ class UsersController extends Controller
             $permiso = Permiso::where('user_id', $user->id);
             $permiso->delete();
         $user->delete();
-        return back()->with('success', 'Se borro la Cuenta');
+        $userAuth = User::find(auth()->user()->id);
+        return $userAuth->permiso->crear_user == 1 ? back()->with('success', 'Se borro la Cuenta') : redirect('/admin/error');
     }
 }

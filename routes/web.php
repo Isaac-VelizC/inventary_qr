@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UsersController;
 use App\Models\User;
@@ -28,9 +29,9 @@ Route::middleware(['auth', 'admin'])->namespace('Admin')->prefix('admin')->group
     Route::post('/item/{id}/delete', [ItemController::class, 'destroy']);
     Route::get('/item/{id}/show',  [ItemController::class, 'show']);
     Route::get('/item/{id}/history',  [ItemController::class, 'history']);
-    //Route::post('area/{id}/qr', [QrController::class, 'show']);
-    //Route::post('area/{id}/qr/create', [QrController::class, 'create']);
-    //Route::get('/qrcode/{id}', [QrController::class, 'show'])->name('qrcode.show');
+    Route::post('area/{id}/qr', [QrController::class, 'show']);
+    Route::post('area/{id}/qr/create', [QrController::class, 'create']);
+    Route::get('/qrcode/{id}', [QrController::class, 'show'])->name('qrcode.show');
     Route::post('/printQR', [ItemController::class, 'printQR']);
     Route::get('/printPdf/{id}', [ItemController::class, 'printPDf']);
     Route::get('/generar-pdf', [AreaController::class, 'generarPDF']);
@@ -42,7 +43,9 @@ Route::middleware(['auth', 'admin'])->namespace('Admin')->prefix('admin')->group
     Route::post('/users/{id}/edit', [UsersController::class, 'update']);
     Route::delete('/users/{id}/delete', [UsersController::class, 'destroy']);
     Route::get('/users/{id}/show',  [UsersController::class, 'show']);
-
+    ///Sin permiso
+    Route::get('/error', [HomeController::class, 'sinPermiso']);
 });
 
 Route::get('/vistaQR/{id}', [ItemController::class, 'vistaQR']);
+

@@ -1,0 +1,1 @@
+No tiene Permiso, Haga lo que tenga que hacer y no se meta en otros asuntos jajajajaja

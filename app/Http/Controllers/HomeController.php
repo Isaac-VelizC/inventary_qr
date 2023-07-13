@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -31,5 +32,9 @@ class HomeController extends Controller
             return view('home')->with('areas', $areas)->with('user', $user);
         }
         return view('welcome');
+    }
+
+    public function sinPermiso() {
+        return view('errors.permiso');
     }
 }
