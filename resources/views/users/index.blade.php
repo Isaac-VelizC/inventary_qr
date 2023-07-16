@@ -9,7 +9,19 @@
             -webkit-overflow-scrolling: touch;
         }
     }
+    .custom-button {
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        color: #fff;
+    }
 
+    .custom-button .badge {
+        background-color: #dc3545;
+        font-size: 12px;
+        padding: 5px 10px;
+        border-radius: 10px;
+    }
 </style>
 
 <section class="section">
@@ -51,7 +63,9 @@
                                         <form action="{{ url('admin/users/'.$item->id.'/delete')}}" method="post">
                                             @csrf
                                             <input name="_method" type="hidden" value="delete">
-                                            <button class="btn" type="submit"><i class="bi bi-x-octagon me-1"></i></button>
+                                            <button type="submit" class="custom-button">
+                                                  <i class="bi bi-x-octagon me-1"></i>
+                                            </button>
                                         </form>
                                     </span>
                                     <a href="{{ url('admin/users/'.$item->id.'/show')}}">

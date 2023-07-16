@@ -50,7 +50,7 @@
                 </div>
                 <br><br>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">guardar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                     <a href="{{url('/')}}" type="reset" class="btn btn-secondary">Cancelar</a>
                 </div>
             </form><!-- Vertical Form -->
